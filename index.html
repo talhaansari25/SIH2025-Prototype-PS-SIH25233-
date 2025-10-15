@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTO-VAPT Dashboard Prototype</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <h1>AUTO-VAPT</h1>
+            </div>
+            <div class="scan-controls">
+                <input type="text" id="scanInput" placeholder="Enter IP Range, e.g., 192.168.1.0/24">
+                <button id="scanBtn"><i class="fas fa-search"></i> Initiate Scan</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="stats-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-globe-americas"></i></div>
+                    <div class="card-info">
+                        <p>Total Devices Discovered</p>
+                        <h2 id="totalDevices">0</h2>
+                    </div>
+                </div>
+                <div class="card critical">
+                    <div class="card-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="card-info">
+                        <p>High-Risk Devices</p>
+                        <h2 id="highRiskDevices">0</h2>
+                    </div>
+                </div>
+                <div class="card medium">
+                    <div class="card-icon"><i class="fas fa-exclamation-circle"></i></div>
+                    <div class="card-info">
+                        <p>Medium-Risk Devices</p>
+                        <h2 id="mediumRiskDevices">0</h2>
+                    </div>
+                </div>
+                <div class="card low">
+                    <div class="card-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="card-info">
+                        <p>Secured/Low-Risk</p>
+                        <h2 id="lowRiskDevices">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-panel">
+                <div class="map-container">
+                    <h3>Global Device Distribution</h3>
+                    <div id="map">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg" alt="World Map">
+                    </div>
+                </div>
+
+                <div class="device-list-container">
+                    <div class="list-header">
+                        <h3>Discovered Devices</h3>
+                        <div class="filter-controls">
+                            <label for="filterRisk">Filter by Risk:</label>
+                            <select id="filterRisk">
+                                <option value="all">All</option>
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table id="deviceTable">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>IP Address</th>
+                                    <th>Make & Model</th>
+                                    <th>Location</th>
+                                    <th>Last Scanned</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="placeholder">
+                                    <td colspan="6">No devices discovered. Initiate a scan to begin.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="deviceModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Device Details</h2>
+                <button id="closeModalBtn" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="device-summary"></div>
+                <div class="vulnerability-details">
+                    <h3>Identified Vulnerabilities</h3>
+                    <div id="modalVulnerabilities"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="loader" class="loader-overlay">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Scanning in progress...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
