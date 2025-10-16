@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ===== DUMMY DATA =====
     const dummyData = [
         {
             id: 1,
